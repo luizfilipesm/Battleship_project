@@ -5,15 +5,18 @@
 #include <string>
 #include <vector>
 
-struct board
-{
-    puzzle** tab;
-}
+
+
 struct puzzle
 {
     bool avalability;
     char content;    
 
+};
+
+struct board
+{
+    puzzle** tab;
 };
 
 puzzle** board_gen(int tam)
@@ -47,25 +50,33 @@ int main(int argc, char const *argv[])
     tamanho_tabuleiro = strtol(argv[1], &p, 10);
     numero_tabuleiros = strtol(argv[2], &p, 10);
     
+     board tabuleiro[numero_tabuleiros];
+
+    for (int b = 0; b < numero_tabuleiros; b++)
+	{
+			tabuleiro[b].tab = board_gen(tamanho_tabuleiro);
+	}
+    
+	for (int b = 0; b < numero_tabuleiros; b++)
+	{
+        std::cout << "mama eu \n";
+		for(int i=0; i < tamanho_tabuleiro; i++)
+    	{
+        	std::cout <<"\n";
+        	for(int j=0; j < tamanho_tabuleiro; j++ )
+        	{
+           		std::cout << tabuleiro[b].tab[i][j].content ;
+        	}
+
+		}
+        std::cout <<"\n"; 	
+	}
+
     
 
-    for (int boards = 0; boards < numero_tabuleiros; boards++){
-    puzzle** tabuleiro;
-    tabuleiro = board_gen(tamanho_tabuleiro);
-
-    for(int i=0; i < tamanho_tabuleiro; i++)
-    {
-        std::cout <<""<<std::endl;
-        for(int j=0; j < tamanho_tabuleiro; j++ )
+    /*for ( int c = 0; c < tamanho_tabuleiro; c++ )
         {
-           std::cout << tabuleiro[i][j].content ;
-        }
-
-    }
-
-    /*for ( int b = 0; b < tamanho_tabuleiro; b++ )
-        {
-        delete [] tabuleiro[b];   
+        delete [] tabuleiro[c];   
         }
         delete [] tabuleiro;
         tabuleiro = 0;
