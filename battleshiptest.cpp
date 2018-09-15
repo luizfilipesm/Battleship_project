@@ -2,10 +2,20 @@
 
 using namespace std;
 
+struct board
+{
+	puzzle[tam][tam]
+}
+
 struct puzzle
 {
 	bool diponibilidade; // Variável que irá testar se espaço está disponível
-	char posicao; // Variável vai indicar o conteudo da posição  
+	char conteudo; // Variável vai indicar o conteudo da posição  
+}
+
+void preenchematriz (tabuleiro[], q_tabuleiros)
+{
+	
 }
 
 puzzle geramatriz (int tamanho)
@@ -40,9 +50,17 @@ puzzle geramatriz (int tamanho)
 
 int main()
 {
-	int t; // Tamanho da matriz
+	int tamanho; // Tamanho da matriz
+	int q_tabuleiros // Quantidade de tabuleiros
+	board tabs[q_tabuleiros];
+	
+	// apenas visual
 	cout << "Insira o tamanho do tabuleiro" << endl;
-	cin >> t; 
-	geramatriz (t);
+	cin >> t;
+
+	for(int i=0 ; i < q_tabuleiros; i++)
+		tabs.puzzle[i] = geramatriz (tamanho);
+		preenchematriz(tab.puzzle[i])
+	
 	// TEM QUE RECEBER A MATRIZ AINDA
 }
