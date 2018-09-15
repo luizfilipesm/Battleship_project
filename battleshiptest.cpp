@@ -1,10 +1,9 @@
 #include<iostream>
 #include<stdlib.h>
-#include <ctime>
-#include <cstdlib>
-#include <string>
-#include <vector>
-
+#include<ctime>
+#include<cstdlib>
+#include<string>
+#include<vector>
 
 
 struct puzzle
@@ -18,6 +17,95 @@ struct board
 {
     puzzle** tab;
 };
+
+void setboat(board &grid ,int tamanho, int boatsize)
+{
+    
+    std::cout <<"oremos";
+    board abacaxi = grid;
+    int posix, posiy, orient;
+    posix = rand() % tamanho;
+    posiy = rand() % tamanho;
+    orient = rand() % 3;
+    bool vert = false, horiz = false;
+
+    std::cout << posix << std::endl;
+    std::cout << posiy << std::endl;
+    std::cout << orient << std::endl;
+
+    if(orient = 0) //horizontal
+    {
+        std::cout <<"oremoshorizon" << std::endl;
+        for (int i = 0; i < boatsize; i++)
+        {
+            if (grid.tab[posix][posiy+i].avalability)
+            {
+                horiz = true;
+            }
+            else
+            {
+                horiz = false;
+                break;
+            }
+        }
+    }
+    
+    else
+    {
+        std::cout <<"oremosvert"<< std::endl;
+        for (int i = 0; i < boatsize; i++)
+        {
+            if (grid.tab[posix+i][posiy].avalability)
+            {
+                vert = true;
+            }
+            else
+            {
+                vert = false;
+                break;
+            }
+        }
+    }
+
+    if(horiz)
+    {
+        std::cout <<"oremos horizn2"<< std::endl;
+        for (int i = 0; i < boatsize; i++)
+        {
+            grid.tab[posix][posiy+i].content = 'X';
+        }
+
+        for (int i = 0; i < 3; i++ )
+        {
+            for(int j = 0; j < boatsize+2; j++ )
+            {
+                grid.tab[posix-1+i][posiy-1+j].avalability = false;
+            }
+        }
+    }            
+    else if(vert)
+    {
+        std::cout <<"oremosvert2"<< std::endl;
+       for (int i = 0; i < boatsize; i++)
+        {
+            grid.tab[posix+i][posiy].content = 'X';
+        }
+
+        for (int i = 0; i < 3; i++ )
+        {
+            for(int j = 0; j < boatsize+2; j++ )
+            {
+                grid.tab[posix-1+j][posiy-1+i].avalability = false;
+            }
+        } 
+
+    }
+    else
+    {
+        setboat(abacaxi, tamanho, boatsize);
+    }
+
+}
 
 puzzle** board_gen(int tam)
 {
@@ -47,19 +135,37 @@ int main(int argc, char const *argv[])
 {
     char *p;
     int tamanho_tabuleiro, numero_tabuleiros;
+    int bship = 4 , cruiser = 3, destroyer = 2, submarine = 1;
     tamanho_tabuleiro = strtol(argv[1], &p, 10);
     numero_tabuleiros = strtol(argv[2], &p, 10);
-    
-     board tabuleiro[numero_tabuleiros];
+    board tabuleiro[numero_tabuleiros];
 
-    for (int b = 0; b < numero_tabuleiros; b++)
+
+
+    for (int conttabv = 0; conttabv < numero_tabuleiros; conttabv++)
 	{
-			tabuleiro[b].tab = board_gen(tamanho_tabuleiro);
+		tabuleiro[conttabv].tab = board_gen(tamanho_tabuleiro);
 	}
+
+    for(int counttab = 0 ; counttab < numero_tabuleiros; counttab++)
+    {
+        std::cout <<"agrvai" << std::endl;
+        setboat(tabuleiro[counttab], tamanho_tabuleiro, bship);
+        setboat(tabuleiro[counttab], tamanho_tabuleiro, cruiser);
+        setboat(tabuleiro[counttab], tamanho_tabuleiro, cruiser);
+        setboat(tabuleiro[counttab], tamanho_tabuleiro, destroyer);
+        setboat(tabuleiro[counttab], tamanho_tabuleiro, destroyer);
+        setboat(tabuleiro[counttab], tamanho_tabuleiro, destroyer);
+        setboat(tabuleiro[counttab], tamanho_tabuleiro, submarine);
+        setboat(tabuleiro[counttab], tamanho_tabuleiro, submarine);
+        setboat(tabuleiro[counttab], tamanho_tabuleiro, submarine);
+        setboat(tabuleiro[counttab], tamanho_tabuleiro, submarine);
+
+    } 
     
 	for (int b = 0; b < numero_tabuleiros; b++)
 	{
-        std::cout << "mama eu \n";
+        std::cout<< std::endl;
 		for(int i=0; i < tamanho_tabuleiro; i++)
     	{
         	std::cout <<"\n";
@@ -69,17 +175,22 @@ int main(int argc, char const *argv[])
         	}
 
 		}
-        std::cout <<"\n"; 	
+        std::cout << b <<"\n"; 	
 	}
 
-    
+    ; 
 
-    /*for ( int c = 0; c < tamanho_tabuleiro; c++ )
+
+    /*for (int e = 0; e < tamanho_tabuleiro; e++ )
+    {   
+        for ( int d = 0; d < tamanho_tabuleiro; d++ )
         {
-        delete [] tabuleiro[c];   
+        delete [] tabuleiro[e].tab[d];   
         }
-        delete [] tabuleiro;
-        tabuleiro = 0;
+        delete [] tabuleiro[e].tab;
+        tabuleiro[e].tab = 0;
+    }*/
+    
         
 
     /*std::cout << tamanho_tabuleiro << "\n";
