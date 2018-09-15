@@ -7,14 +7,13 @@
 
 
 struct puzzle
-{
-    bool avalability;
-    char content;    
-
-};
+{// Estrutura do conteúdo da matriz
+    bool avalability; // Variável que denota a disponibilidade da célula
+    char content; // Variável que denota o conteúdo da célula
+}; 
 
 struct board
-{
+{// Estturtura do tabuleiro
     puzzle** tab;
 };
 
@@ -109,37 +108,37 @@ void setboat(board &grid ,int tamanho, int boatsize)
 
 puzzle** board_gen(int tam)
 {
-    puzzle** tab_aqua = 0;
-    tab_aqua = new puzzle *[tam];
+    puzzle** tab_aqua = 0; // Matriz receberá '0' inicializando o tabuleiro
+    tab_aqua = new puzzle *[tam]; //
     
     for(int h = 0; h < tam; h++)
         {
-            tab_aqua[h] = new puzzle [tam];
+            tab_aqua[h] = new puzzle [tam]; // 
         }
     
     for(int i=0; i < tam; i++)
     {
         for(int j=0; j < tam; j++ )
         {
-            tab_aqua[i][j].avalability = true;
-            tab_aqua[i][j].content = '-';
+            tab_aqua[i][j].avalability = true;// Preenchendo a tabela de disponibilidade, deixando todos os espaços disponíveis
+            tab_aqua[i][j].content = '-'; // Preenchendo todos os espaços com "-" que representa água 
         }
 
     }
 
-    return tab_aqua;
+    return tab_aqua; // Retorna a tabela inicializada e preenchida 
 }
 
 
 int main(int argc, char const *argv[])
 {
-    char *p;
+    char *p; 
     int tamanho_tabuleiro, numero_tabuleiros;
     int bship = 4 , cruiser = 3, destroyer = 2, submarine = 1;
     tamanho_tabuleiro = strtol(argv[1], &p, 10);
     numero_tabuleiros = strtol(argv[2], &p, 10);
-    board tabuleiro[numero_tabuleiros];
-
+    
+    board tabuleiro[numero_tabuleiros];todo
 
 
     for (int conttabv = 0; conttabv < numero_tabuleiros; conttabv++)
