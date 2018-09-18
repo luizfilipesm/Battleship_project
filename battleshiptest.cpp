@@ -28,20 +28,29 @@ void setboat(board &grid ,int tamanho, int boatsize)
     orient = rand() % 2;
     bool vert = false, horiz = false;
 
+    std::cout << posix << "  " << posiy << "  " << orient << std::endl; 
+
 
 
     if(orient == 0) //horizontal
     {
         for (int i = 0; i < boatsize; i++)
         {   
-            
-            if (grid.tab[posix][posiy+i].avalability and posiy+i < tamanho) 
+            if(posiy+i < tamanho)
             {
-                horiz = true;
+                if (grid.tab[posix][posiy+i].avalability) 
+                {
+                    horiz = true;
+                }
+                else
+                {
+                    horiz = false;
+                    break;
+                }
             }
             else
             {
-                horiz = false;
+                vert = false;
                 break;
             }
         }
@@ -51,9 +60,16 @@ void setboat(board &grid ,int tamanho, int boatsize)
     {
         for (int i = 0; i < boatsize; i++)
         {
-            if (grid.tab[posix+i][posiy].avalability and posix+1 < tamanho)
-            {
+            if(posix+i < tamanho){
+                if (grid.tab[posix+i][posiy].avalability)
+                {
                 vert = true;
+                }
+                else
+                {
+                vert = false;
+                break;
+            }
             }
             else
             {
@@ -78,9 +94,9 @@ void setboat(board &grid ,int tamanho, int boatsize)
                 {
                     grid.tab[posix-1+i][posiy-1+j].avalability = false;    
                 }
-                
+                    
+                }
             }
-        }
     }            
     else if(vert)
     {
@@ -175,7 +191,7 @@ int main(int argc, char const *argv[])
         setboat(tabuleiro[counttab], tamanho_tabuleiro, submarine);
         setboat(tabuleiro[counttab], tamanho_tabuleiro, submarine);
 
-    }    */
+    } */
     
 	for (int b = 0; b < numero_tabuleiros; b++)
 	{
