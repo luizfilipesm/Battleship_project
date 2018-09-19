@@ -28,7 +28,7 @@ void setboat(board &grid ,int tamanho, int boatsize)
     orient = rand() % 2;
     bool vert = false, horiz = false;
 
-    std::cout << posix << "  " << posiy << "  " << orient << std::endl; 
+ 
 
 
 
@@ -60,7 +60,8 @@ void setboat(board &grid ,int tamanho, int boatsize)
     {
         for (int i = 0; i < boatsize; i++)
         {
-            if(posix+i < tamanho){
+            if(posix+i < tamanho)
+            {
                 if (grid.tab[posix+i][posiy].avalability)
                 {
                 vert = true;
@@ -90,9 +91,12 @@ void setboat(board &grid ,int tamanho, int boatsize)
         {
             for(int j = 0; j < boatsize+2; j++ )
             {   
-                if(posix-1+i >=0 and posix-1+i < tamanho && posiy-1+j >=0 and posiy-1+j < tamanho )
+                if(posiy-1+j < tamanho && posix-1+i < tamanho)
                 {
-                    grid.tab[posix-1+i][posiy-1+j].avalability = false;    
+                    if(posix-1+i >=0 && posiy-1+j >=0)
+                    {
+                        grid.tab[posix-1+i][posiy-1+j].avalability = false;    
+                    }
                 }
                     
                 }
@@ -109,9 +113,12 @@ void setboat(board &grid ,int tamanho, int boatsize)
         {
             for(int j = 0; j < boatsize+2; j++ )
             {
-                if(posix-1+j >=0 and posix-1+j < tamanho && posiy-1+i >=0 and posiy-1+i < tamanho )
+                if(posiy-1+i < tamanho && posix-1+j < tamanho)
                 {
-                grid.tab[posix-1+j][posiy-1+i].avalability = false;
+                    if(posix-1+j >=0 && posiy-1+i >=0)
+                    {
+                    grid.tab[posix-1+j][posiy-1+i].avalability = false;
+                    }
                 }
             }
         } 
@@ -193,9 +200,12 @@ int main(int argc, char const *argv[])
 
     } */
     
+    printmatrix<< tamanho_tabuleiro << std::endl;
+    printmatrix<< numero_tabuleiros << std::endl;
+
 	for (int b = 0; b < numero_tabuleiros; b++)
 	{
-        printmatrix<< std::endl;
+        printmatrix<< b <<"t" << std::endl;
 		for(int i=0; i < tamanho_tabuleiro; i++)
     	{
         	printmatrix <<"\n";
@@ -205,10 +215,12 @@ int main(int argc, char const *argv[])
         	}
 
 		}
-        printmatrix << b <<"\n"; 	
+        printmatrix  << "\n\n\n\n"; 	
 	}
 
         printmatrix.close();
+
+
 
 
     /*for (int e = 0; e < tamanho_tabuleiro; e++ )
