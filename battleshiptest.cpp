@@ -19,6 +19,131 @@ struct board
     puzzle** tab;
 };
 
+void respostajogador (int solicita, board &grid, int tamanho)
+{
+    int a[solicita], b[solicita];
+    bool correto = true;
+    for (int i = 0; i<solicita; i++)
+    {    std::cout << "Insira a sua " << i+1 << "coordenada";
+        std::cin >> a[i];
+        std::cin >> b[i];
+        if (grid.tab[a[i]][b[i]].content == 'X')
+        {
+            correto = correto;
+        }
+        else
+        {
+            correto = false;
+        }
+        
+    }
+
+    if (correto)
+    {
+        std::cout << "Acertou miserávi" << std::endl;
+    }
+
+    else
+    {
+       std::cout << "ERROUUUUUUU" << std::endl; 
+    }
+
+    for(int i=0; i < tamanho; i++)
+    {
+    	std::cout <<"\n";
+       	for(int j=0; j < tamanho; j++ )
+       	{
+     	std::cout << grid.tab[i][j].content ;
+        }
+
+	}
+
+    std::cout << "suas coordenadas foram:" << std::endl;
+
+    for (int i=0; i<solicita; i++)
+    {
+        std::cout << "horizontal: " << a[i] << " vertical: "<< b[i] << std::endl;
+    }
+
+    
+
+
+}
+
+void imprimeusr (board &grid, int tamanho, int &solicita)
+{
+    int contlinha[tamanho], contcoluna[tamanho];
+    std::cout <<"Vamos jogar seu puzzle ja foi sorteado\n";
+    std::cout <<"0 representa água \n\n\n";
+
+    for(int i=0; i < tamanho; i++)
+    {
+        contcoluna[i] = 0;
+        contlinha[i] = 0;
+    }
+    
+    for(int i=0; i < tamanho; i++)
+    	{
+        	
+        	for(int j=0; j < tamanho; j++ )
+        	{
+           		if (grid.tab[i][j].content == 'X')
+                {
+                    contlinha[i]++;
+                }
+        	}
+
+		}
+
+    for(int i=0; i < tamanho; i++)
+    {
+        
+        for(int j=0; j < tamanho; j++ )
+        {
+            if (grid.tab[j][i].content == 'X')
+            {
+                contcoluna[i]++;
+            }
+        }
+
+    }    
+
+    std::cout << "    ";
+
+    for(int i=0; i < tamanho; i++)
+        {
+        std::cout << i << " ";
+        } 
+
+    std::cout << "\n"; 
+
+
+    for(int i=0; i < tamanho; i++)
+    {
+        std::cout <<"\n";
+        std::cout << i << "   ";
+        for(int j=0; j < tamanho; j++ )
+            {   
+                std::cout <<  "0 ";
+            }
+        std::cout << contlinha[i] << " ";
+    }
+
+    std::cout <<"\n";
+    std::cout << "    ";
+
+    for(int i=0; i < tamanho; i++)
+    {
+    std::cout << contcoluna[i] << " ";
+    }  
+
+    std::cout <<"\n";
+    for (int i = 0; i < tamanho; i++)
+        {
+        solicita = solicita + contcoluna[i];
+        }
+}
+
 void setboat(board &grid ,int tamanho, int boatsize)
 {
     
@@ -220,6 +345,11 @@ int main(int argc, char const *argv[])
 
         printmatrix.close();
 
+
+    int randtabuleiro = rand () % numero_tabuleiros; 
+    int numerodesolicitacoes = 0;
+    imprimeusr (tabuleiro[randtabuleiro] , tamanho_tabuleiro, numerodesolicitacoes);
+    respostajogador (numero_tabuleiros, tabuleiro[randtabuleiro], tamanho_tabuleiro);
 
 
 
